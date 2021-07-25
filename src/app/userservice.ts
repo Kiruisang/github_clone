@@ -33,7 +33,7 @@ import { environment } from 'src/environments/environment.prod';
       }
   
       return new Promise<void>((resolve, reject) => {
-        this.http.get<Response>('https://api.github.com/users/'+searchName+'?access_token='+environment.apiKey).toPromise().then(
+        this.http.get<Response>(`https://api.github.com/users/${searchName}?access_token=${environment.apiKey}`).toPromise().then(
           (result) => {
             this.foundUser = result;
             console.log(this.foundUser);
@@ -46,7 +46,7 @@ import { environment } from 'src/environments/environment.prod';
         );
       });
     }
-    getReopos(searchName: string){
+    getRepos(searchName: string){
       interface Repos{
         name:string;
         html_url:string;
@@ -57,7 +57,7 @@ import { environment } from 'src/environments/environment.prod';
         created_at:Date;
       }
       return new Promise<void>((resolve,reject)=>{
-        this.http.get<Repos>('https://api.github.com/users/'+searchName+"/repos?order=created&sort=asc?access_token="+environment.apiKey).toPromise().then(
+        this.http.get<Repos>(`https://api.github.com/users/${searchName}/repos?order=created&sort=asc?access_token=${environment.apiKey}`).toPromise().then(
           (results) => {
             this.allRepos = results;
             resolve();
