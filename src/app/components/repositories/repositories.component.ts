@@ -1,15 +1,31 @@
 import { Component, OnInit } from '@angular/core';
+import {UserserviceService} from '../../userservice';
+import { Repos } from '../../repos';
 
 @Component({
-  selector: 'app-repositories',
+  selector: 'app-components-repositories',
   templateUrl: './repositories.component.html',
   styleUrls: ['./repositories.component.css']
 })
 export class RepositoriesComponent implements OnInit {
 
-  constructor() { }
+  repo: Repos | undefined;
+  constructor( public repoService: UserserviceService ) { }
 
-  ngOnInit(): void {
+  repoSearch(searchName: string){
+    this.repoService.getRepos(searchName).then(
+      (results: any)=>{
+        this.repo =this.repoService.allRepos
+        console.log(this.repo);
+      },
+      (error: any)=>{
+        console.log(error);
+      }
+    );
   }
 
+  ngOnInit() {
+    this.repoSearch('Kiruisang');
+  }
+ 
 }

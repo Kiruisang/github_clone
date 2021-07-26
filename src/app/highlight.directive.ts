@@ -1,23 +1,12 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 
-@Directive({
-  selector: '[appHighlight]'
-})
-export class HighlightDirective {
+import { UserserviceService } from './userservice.service';
 
-  constructor(private el: ElementRef) {}
+describe('UserserviceService', () => {
+  beforeEach(() => TestBed.configureTestingModule({}));
 
-  @HostListener('mouseenter') onMouseEnter() {
-    this.highlight('teal');
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
-    this.highlight(null);
-  }
-
-  private highlight(color: string) {
-    this.el.nativeElement.style.backgroundColor = color;
-  }
-
-}
-
+  it('should be created', () => {
+    const service: UserserviceService = TestBed.get(UserserviceService);
+    expect(service).toBeTruthy();
+  });
+});
